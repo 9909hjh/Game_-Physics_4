@@ -48,7 +48,7 @@ Vector2D Vehicle::goradian(float x, float y, float radian)
   return rota;
 }
 
-void Vehicle::pursue(Vehicle* m_vehicle)
+Vector2D Vehicle::pursue(Vehicle* m_vehicle)
 {
     *m_target = *m_vehicle->m_pos;
     *m_prediction = *m_vehicle->m_vel;
@@ -70,14 +70,15 @@ void Vehicle::draw(SDL_Renderer* renderer)
  circleRGBA(renderer, m_target->getX(), m_target->getY(), r ,255, 100, 0, 200);
 }
 
-void Vehicle::seek(Vector2D* target)
+Vector2D Vehicle::seek(Vector2D* target)
 {
   *m_force = *target - *m_pos;
   m_force->normalize();
   *m_force *= maxSpeed;
 
   m_force->limit(maxForce);
-  applyForce(m_force);
+  //applyForce(m_force);
+  return *m_force;
 }
 
 void Vehicle::applyForce(Vector2D* force)

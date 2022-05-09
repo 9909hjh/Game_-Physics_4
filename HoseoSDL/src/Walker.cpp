@@ -13,37 +13,37 @@ std::uniform_int_distribution<int> dis(0, 3);
 Walker::Walker() 
 {
   m_Vehicle.push_back(new Vehicle(100, 100));
-    m_Vehicle.push_back(new Vehicle(50, 100));
+  //m_Vehicle.push_back(new Vehicle(50, 100));
 
   // 깃헙테스트
-  m_mousePos = new Vector2D(0, 0);
-  target = new Vector2D(0, 0);
-}
+  
+  m_target = new Target(200, 100);
+  steering = new Vector2D(1, 1);
 
-void Walker::mousemove()
-{
-  m_mousePos = TheInputHandler::Instance()->getMousePosition();
-
-  *target = *m_mousePos;
 }
 
 void Walker::update() 
 {
-  mousemove();
-  
   for(int i = 0; i != m_Vehicle.size(); i++)
     {
+      
       m_Vehicle[i]->update();
+      //m_Vehicle[i]->pursue(m_target); // 문제 부분.
+      *steering = m_Vehicle[i]->pursue(m_target);
+      m_Vehicle[i]->applyForce(steering);
+      m_target->applyForce(steering);
+      m_target->update();
+      //m_target[i]->update();
     }
 }
 
 void Walker::draw(SDL_Renderer* renderer)
 {
-  filledCircleColor(renderer, target->getX(), target->getY(), 10, 0xFFFFFF00);
-  
   for(int i = 0; i != m_Vehicle.size(); i++)
     {
       m_Vehicle[i]->draw(renderer);
-      m_Vehicle[i]->seek(target);
+      //m_Vehicle[i]->draw2(renderer);
+      //m_Vehicle[i]->seek(target); // 문제 부분.
+      m_target->draw(renderer);
     }
 }

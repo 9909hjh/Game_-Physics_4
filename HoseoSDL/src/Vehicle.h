@@ -8,17 +8,17 @@
 class Vehicle 
 {
 public:
-	Vehicle() {}
+	//Vehicle() {}
   Vehicle(int x, int y);
   void draw(SDL_Renderer* renderer);
   void update();
   
-  void seek(Vector2D* target);
+  Vector2D seek(Vector2D* target);
   void applyForce(Vector2D* force);
   Vector2D goradian(float x, float y, float radian);
   
   // pursue, Evade 조정행동 과제.
-  void pursue(Vehicle* m_vehicle);
+  Vector2D pursue(Vehicle* m_vehicle);
 
 
   void edges();
