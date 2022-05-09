@@ -15,6 +15,11 @@ Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16)
   rdi2 = new Vector2D(0, 0);
   rdi3 = new Vector2D(0, 0);
   //m_mousePos = new Vector2D(0, 0);
+
+  m_target = new Vector2D(0, 0);
+  //Vector2D m_target(0, 0);
+  m_prediction = new Vector2D(0, 0);
+  v3 = new Vector2D(0, 0);
 }
 
 void Vehicle::update() 
@@ -35,13 +40,6 @@ void Vehicle::update()
 
 Vector2D Vehicle::goradian(float x, float y, float radian)
 {
-  // Vector2D* rota = new Vector2D(0, 0);
-  
-  // rota->setX(cos(radian) * x - sin(radian) * y);
-  // rota->setY(sin(radian) * x + cos(radian) * y);
-
-  // return *rota;
-
   Vector2D rota(0, 0);
   
   rota.setX(cos(radian) * x - sin(radian) * y);
@@ -50,16 +48,26 @@ Vector2D Vehicle::goradian(float x, float y, float radian)
   return rota;
 }
 
-// void Vehicle::mousemove()
-// {
-//   m_mousePos = TheInputHandler::Instance()->getMousePosition();
+void Vehicle::pursue(Vehicle* m_vehicle)
+{
+    *m_target = *m_vehicle->m_pos;
+    *m_prediction = *m_vehicle->m_vel;
 
-//   *m_pos = *m_mousePos;
-// }
+    *m_prediction *= 10;
+    *m_target += *m_prediction;
+    //*v3 = *m_target - *vehicle;
+    //v3->normalize();
+   
+    //m_prediction = m_prediction * (*v3 / 30);
+    
+    return seek(m_target);
+}
 
 void Vehicle::draw(SDL_Renderer* renderer)
 {
  filledTrigonRGBA(renderer,  rdi1->getX() + m_pos->getX(), rdi1->getY() + m_pos->getY(), rdi2->getX() + m_pos->getX(), rdi2->getY() + m_pos->getY(),rdi3->getX() + m_pos->getX(), rdi3->getY() + m_pos->getY(), 255, 255, 255, 255);
+
+ circleRGBA(renderer, m_target->getX(), m_target->getY(), r ,255, 100, 0, 200);
 }
 
 void Vehicle::seek(Vector2D* target)

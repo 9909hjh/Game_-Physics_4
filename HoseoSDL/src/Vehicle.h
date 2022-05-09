@@ -5,13 +5,10 @@
 #include "InputHandler.h"
 #include <main.h>
 
-//#include "usr/include/SDL2/SDL2_gfxPrimitives.h"
-//#include "usr/include/SDL2/SDL.h"
-
-
 class Vehicle 
 {
 public:
+	Vehicle() {}
   Vehicle(int x, int y);
   void draw(SDL_Renderer* renderer);
   void update();
@@ -19,12 +16,15 @@ public:
   void seek(Vector2D* target);
   void applyForce(Vector2D* force);
   Vector2D goradian(float x, float y, float radian);
-  //void mousemove();
+  
+  // pursue, Evade 조정행동 과제.
+  void pursue(Vehicle* m_vehicle);
+
 
   void edges();
 
 
-private:
+protected:
   Vector2D* m_pos;
   Vector2D* m_vel;
   Vector2D* m_acc;
@@ -34,13 +34,17 @@ private:
   Vector2D* rdi1;
   Vector2D* rdi2;
   Vector2D* rdi3;
-  //Vector2D* m_mousePos;
+
+  Vector2D* m_target;
+  Vector2D* m_prediction;
+  //Vector2D p_target;
+  Vector2D* v3;
+  //Vehicle* m_vehicle;
 
   int maxSpeed;
   float maxForce;
   int r;
 
-  //float angle;
   float m_rotate = 0;
   const float PI = 3.14f;
 };
