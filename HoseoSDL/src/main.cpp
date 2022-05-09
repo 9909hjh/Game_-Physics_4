@@ -21,6 +21,7 @@ TTF_Font* m_pFont;
 Mix_Chunk* chunk;
 bool bLeftMousePressed = false;
 
+
 bool init();
 void handleInput();
 void update();
