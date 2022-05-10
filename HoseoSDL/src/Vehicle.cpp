@@ -19,7 +19,9 @@ Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16)
   m_target = new Vector2D(0, 0);
   //Vector2D m_target(0, 0);
   m_prediction = new Vector2D(0, 0);
-  v3 = new Vector2D(0, 0);
+  //v3 = new Vector2D(0, 0);
+  v3 = 0;
+  veh = new Vector2D(0, 0);
 }
 
 void Vehicle::update() 
@@ -50,24 +52,33 @@ Vector2D Vehicle::goradian(float x, float y, float radian)
 
 Vector2D Vehicle::pursue(Vehicle* m_vehicle)
 {
+    *veh = *m_vehicle->m_pos; // 이거다. 이게 큰 원(타킷)의 중심이다.
+
     *m_target = *m_vehicle->m_pos;
     *m_prediction = *m_vehicle->m_vel;
 
-    *m_prediction *= 10;
-    *m_target += *m_prediction;
-    //*v3 = *m_target - *vehicle;
+    *m_prediction *= 30;
+    /*v3 = m_target - m_pos;
+    m_v3 = sqrt(v3) / 30;*/
+
     //v3->normalize();
-   
-    //m_prediction = m_prediction * (*v3 / 30);
+    //v3 /= 10;
+
+    //*m_prediction *= m_v3;
+    *m_target += *m_prediction;
     
+
     return seek(m_target);
 }
 
 void Vehicle::draw(SDL_Renderer* renderer)
 {
- filledTrigonRGBA(renderer,  rdi1->getX() + m_pos->getX(), rdi1->getY() + m_pos->getY(), rdi2->getX() + m_pos->getX(), rdi2->getY() + m_pos->getY(),rdi3->getX() + m_pos->getX(), rdi3->getY() + m_pos->getY(), 255, 255, 255, 255);
+ filledTrigonRGBA(renderer, rdi1->getX() + m_pos->getX(), rdi1->getY() + m_pos->getY(), rdi2->getX() + m_pos->getX(), rdi2->getY() + m_pos->getY(),rdi3->getX() + m_pos->getX(), rdi3->getY() + m_pos->getY(), 255, 255, 255, 255);
+ 
+ //lineRGBA(renderer, m_pos->getX(), m_pos->getY(), m_target->getX(), m_target->getY(), 100, 100, 100, 100); // 삼각형이 작은 원을 따라가나 확인.
+ lineRGBA(renderer, veh->getX(), veh->getY(), m_target->getX(), m_target->getY(), 100, 100, 100, 255);
 
- circleRGBA(renderer, m_target->getX(), m_target->getY(), r ,255, 100, 0, 200);
+ filledCircleRGBA(renderer, m_target->getX(), m_target->getY(), r / 2 ,255, 100, 0, 200); // 작은 원.
 }
 
 Vector2D Vehicle::seek(Vector2D* target)

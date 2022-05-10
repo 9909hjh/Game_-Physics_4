@@ -36,9 +36,13 @@ protected:
   Vector2D* rdi3;
 
   Vector2D* m_target;
+  Vector2D* veh;
   Vector2D* m_prediction;
+  //Vehicle* vehicle;
   //Vector2D p_target;
-  Vector2D* v3;
+  //Vector2D* v3;
+  float v3;
+  float m_v3;
   //Vehicle* m_vehicle;
 
   int maxSpeed;

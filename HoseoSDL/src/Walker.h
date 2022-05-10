@@ -19,9 +19,11 @@ public:
 
 private:
   std::vector<Vehicle*> m_Vehicle;
-  //std::vector<Target*> m_target;
-  Target* m_target;
-  Vector2D* m_mousePos;
-  Vector2D* target;
+  std::vector<Target*> m_target;
+  //Target* m_target;
+
+  //Vector2D* m_mousePos;
+  //Vector2D* target;
+
   Vector2D* steering;
 };
