@@ -41,7 +41,7 @@ protected:
   //Vehicle* vehicle;
   //Vector2D p_target;
   //Vector2D* v3;
-  float v3;
+  Vector2D* v3;
   float m_v3;
   //Vehicle* m_vehicle;
 

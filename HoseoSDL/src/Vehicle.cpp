@@ -20,7 +20,10 @@ Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16)
   //Vector2D m_target(0, 0);
   m_prediction = new Vector2D(0, 0);
   //v3 = new Vector2D(0, 0);
-  v3 = 0;
+  /*v3 = 0;
+  m_v3 = 0;*/
+  v3 = new Vector2D(0, 0);
+  m_v3 = 0;
   veh = new Vector2D(0, 0);
 }
 
@@ -57,14 +60,17 @@ Vector2D Vehicle::pursue(Vehicle* m_vehicle)
     *m_target = *m_vehicle->m_pos;
     *m_prediction = *m_vehicle->m_vel;
 
-    *m_prediction *= 30;
-    /*v3 = m_target - m_pos;
-    m_v3 = sqrt(v3) / 30;*/
+    //*m_prediction *= 30;
 
+    *v3 = *m_target - *m_pos;
+    m_v3 = v3->length();
+    m_v3 = m_v3 / 10;
+
+    *m_prediction *= m_v3;
     //v3->normalize();
     //v3 /= 10;
+    
 
-    //*m_prediction *= m_v3;
     *m_target += *m_prediction;
     
 
