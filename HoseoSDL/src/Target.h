@@ -9,7 +9,8 @@ public:
 	virtual void draw(SDL_Renderer* renderer);
 	virtual void applyForce(Vector2D* force);
 	//virtual void pursue(Target* Target);
-	//
+	void edges();
+	
 private:
 	//Vehicle m_vehicle;
 	Vector2D* v_vehcle;

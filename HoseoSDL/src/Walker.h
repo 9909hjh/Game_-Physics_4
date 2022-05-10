@@ -8,6 +8,7 @@
 #include <vector>
 #include "Target.h"
 #include <main.h>
+#include <iostream>
 
 class Walker 
 {
@@ -20,10 +21,13 @@ public:
 private:
   std::vector<Vehicle*> m_Vehicle;
   std::vector<Target*> m_target;
-  //Target* m_target;
-
+  //Target* T_target;
+  //Vehicle* V_vehicle;
   //Vector2D* m_mousePos;
   //Vector2D* target;
+  float f_Veh;
+  float f_Tar;
+  float d;
 
   Vector2D* steering;
 };

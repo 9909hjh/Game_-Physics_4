@@ -4,7 +4,7 @@
 #include "Vehicle.h"
 #include <math.h>
 
-Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16)
+Vehicle::Vehicle(int x, int y) : maxSpeed(5), maxForce(0.25f), r(16)
 {
   m_pos = new Vector2D(x, y);
   m_vel = new Vector2D(0, 0);
@@ -63,7 +63,7 @@ Vector2D Vehicle::pursue(Vehicle* m_vehicle)
     //*m_prediction *= 30;
 
     *v3 = *m_target - *m_pos;
-    m_v3 = v3->length();
+    m_v3 = v3->length(); // mag()ÀÇ ºÎºÐ. mag() = sqrt() == length()
     m_v3 = m_v3 / 10;
 
     *m_prediction *= m_v3;

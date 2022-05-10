@@ -19,10 +19,10 @@ public:
   
   // pursue, Evade 조정행동 과제.
   Vector2D pursue(Vehicle* m_vehicle);
-
-
   void edges();
 
+  Vector2D getPos() { return *m_pos; }
+  float getR() { return r; }
 
 protected:
   Vector2D* m_pos;
@@ -47,7 +47,7 @@ protected:
 
   int maxSpeed;
   float maxForce;
-  int r;
+  float r;
 
   float m_rotate = 0;
   const float PI = 3.14f;

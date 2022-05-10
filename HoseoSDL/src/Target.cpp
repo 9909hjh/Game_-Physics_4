@@ -1,4 +1,6 @@
 #include "Target.h"
+#define WIDTH (600)
+#define HEIGHT (400)
 
 Target::Target(int _x, int _y) : Vehicle(_x, _y) 
 {
@@ -12,9 +14,7 @@ Target::Target(int _x, int _y) : Vehicle(_x, _y)
 void Target::update()
 {
 	*m_vel *= 5;
-	
-	//*v_vehcle = *m_pos;
-	
+	edges();
 	Vehicle::update();
 }
 
@@ -24,10 +24,30 @@ void Target::applyForce(Vector2D* force)
 	//*m_acc += *force;
 }
 
-//void pursue(Target* Target)
-//{
-//	
-//}
+void Target::edges()
+{
+	if (m_pos->getX() > WIDTH - r)
+	{
+		m_vel->setX(m_vel->getX() * -1);
+		m_pos->setX(WIDTH - r);
+	}
+	else if (m_pos->getX() < r)
+	{
+		m_vel->setX(m_vel->getX() * -1);
+		m_pos->setX(r);
+	}
+
+	if (m_pos->getY() > HEIGHT - r)
+	{
+		m_vel->setY(m_vel->getY() * -1);
+		m_pos->setY(HEIGHT - r);
+	}
+	else if (m_pos->getY() < r)
+	{
+		m_vel->setY(m_vel->getY() * -1);
+		m_pos->setY(r);
+	}
+}
 
 void Target::draw(SDL_Renderer* renderer)
 {
