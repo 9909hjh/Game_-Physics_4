@@ -38,22 +38,22 @@
     <ClInclude Include="include\main.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\Game.h">
+    <ClInclude Include="include\Game.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\InputHandler.h">
+    <ClInclude Include="include\InputHandler.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\Vector2D.h">
+    <ClInclude Include="include\Vector2D.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\Vehicle.h">
+    <ClInclude Include="include\Vehicle.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\Walker.h">
+    <ClInclude Include="include\Walker.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
-    <ClInclude Include="src\Target.h">
+    <ClInclude Include="include\Target.h">
       <Filter>헤더 파일</Filter>
     </ClInclude>
   </ItemGroup>

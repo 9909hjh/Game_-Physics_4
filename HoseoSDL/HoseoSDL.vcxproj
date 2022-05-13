@@ -151,12 +151,12 @@
   </ItemGroup>
   <ItemGroup>
     <ClInclude Include="include\main.h" />
-    <ClInclude Include="src\Game.h" />
-    <ClInclude Include="src\InputHandler.h" />
-    <ClInclude Include="src\Target.h" />
-    <ClInclude Include="src\Vector2D.h" />
-    <ClInclude Include="src\Vehicle.h" />
-    <ClInclude Include="src\Walker.h" />
+    <ClInclude Include="include\Game.h" />
+    <ClInclude Include="include\InputHandler.h" />
+    <ClInclude Include="include\Target.h" />
+    <ClInclude Include="include\Vector2D.h" />
+    <ClInclude Include="include\Vehicle.h" />
+    <ClInclude Include="include\Walker.h" />
   </ItemGroup>
   <Import Project="$(VCTargetsPath)\Microsoft.Cpp.targets" />
   <ImportGroup Label="ExtensionTargets">
