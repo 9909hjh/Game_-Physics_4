@@ -25,6 +25,7 @@ Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16)
   v3 = new Vector2D(0, 0);
   m_v3 = 0;
   veh = new Vector2D(0, 0);
+  
 }
 
 void Vehicle::update() 
@@ -55,7 +56,7 @@ Vector2D Vehicle::goradian(float x, float y, float radian)
 
 Vector2D Vehicle::pursue(Vehicle* m_vehicle)
 {
-    *veh = *m_vehicle->m_pos; // ÀÌ°Å´Ù. ÀÌ°Ô Å« ¿ø(Å¸Å¶)ÀÇ Áß½ÉÀÌ´Ù.
+    *veh = *m_vehicle->m_pos; // ï¿½Ì°Å´ï¿½. ï¿½Ì°ï¿½ Å« ï¿½(Å¸Å¶)ï¿½ ï¿½ß½ï¿½Ì´ï¿½.
 
     *m_target = *m_vehicle->m_pos;
     *m_prediction = *m_vehicle->m_vel;
@@ -63,7 +64,7 @@ Vector2D Vehicle::pursue(Vehicle* m_vehicle)
     //*m_prediction *= 30;
 
     *v3 = *m_target - *m_pos;
-    m_v3 = v3->length(); // mag()ÀÇ ºÎºÐ. mag() = sqrt() == length()
+    m_v3 = v3->length(); // mag()ï¿½ ï¿½Îºï¿½. mag() = sqrt() == length()
     m_v3 = m_v3 / 10;
 
     *m_prediction *= m_v3;
@@ -81,10 +82,10 @@ void Vehicle::draw(SDL_Renderer* renderer)
 {
  filledTrigonRGBA(renderer, rdi1->getX() + m_pos->getX(), rdi1->getY() + m_pos->getY(), rdi2->getX() + m_pos->getX(), rdi2->getY() + m_pos->getY(),rdi3->getX() + m_pos->getX(), rdi3->getY() + m_pos->getY(), 255, 255, 255, 255);
  
- //lineRGBA(renderer, m_pos->getX(), m_pos->getY(), m_target->getX(), m_target->getY(), 100, 100, 100, 100); // »ï°¢ÇüÀÌ ÀÛÀº ¿øÀ» µû¶ó°¡³ª È®ÀÎ.
+ //lineRGBA(renderer, m_pos->getX(), m_pos->getY(), m_target->getX(), m_target->getY(), 100, 100, 100, 100); // ï¿½ï°¢ï¿½ ï¿½ ï¿½ ï¿½ó°¡³ï¿½ È®ï¿½.
  lineRGBA(renderer, veh->getX(), veh->getY(), m_target->getX(), m_target->getY(), 100, 100, 100, 255);
 
- filledCircleRGBA(renderer, m_target->getX(), m_target->getY(), r / 2 ,255, 100, 0, 200); // ÀÛÀº ¿ø.
+ filledCircleRGBA(renderer, m_target->getX(), m_target->getY(), r / 2 ,255, 100, 0, 200); // ï¿½ ï¿½.
 }
 
 Vector2D Vehicle::seek(Vector2D* target)
