@@ -2,7 +2,7 @@
 linkTarget = a.out
 
 #pwd 명령으로 확인 가능
-HOME = /home/runner/tamgugwajex-10/HoseoSDL
+HOME = /home/runner/HoseoSDL
 
 SRC_DIR := $(HOME)/src
 INC_DIR := $(HOME)/include
