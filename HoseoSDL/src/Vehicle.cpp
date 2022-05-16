@@ -4,7 +4,7 @@
 #include "Vehicle.h"
 #include <math.h>
 
-Vehicle::Vehicle(int x, int y) : maxSpeed(5), maxForce(0.25f), r(16)
+Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16)
 {
   m_pos = new Vector2D(x, y);
   m_vel = new Vector2D(0, 0);

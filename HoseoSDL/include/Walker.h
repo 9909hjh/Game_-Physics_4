@@ -28,6 +28,7 @@ private:
   float f_Veh;
   float f_Tar;
   float d;
-
+  float f;
   Vector2D* steering;
+  Target* T;
 };
