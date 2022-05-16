@@ -10,11 +10,7 @@ std::random_device rd;
 std::mt19937 gen(rd());
 
 // 0 부터 3까지 균등하게 나타나는 난수열을 생성하기 위해 균등 분포 정의.
-std::uniform_int_distribution<int> dis(400, 600); // 앞이 min값을 넣어줘야 하며, 뒤 max값을 넣어줘야 한다.
-<<<<<<< HEAD
->>>>>>> ca08f1805c141fef0648e72a1f1880f690ca86d1
-=======
->>>>>>> ca08f1805c141fef0648e72a1f1880f690ca86d1
+std::uniform_int_distribution<int> dis(400, 600); // 앞이 min값을 넣어줘야 하며, 뒤 max값을 넣어줘야 한다
 
 Walker::Walker() 
 {
