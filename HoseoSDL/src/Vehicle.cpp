@@ -82,7 +82,7 @@ void Vehicle::draw(SDL_Renderer* renderer)
 {
  filledTrigonRGBA(renderer, rdi1->getX() + m_pos->getX(), rdi1->getY() + m_pos->getY(), rdi2->getX() + m_pos->getX(), rdi2->getY() + m_pos->getY(),rdi3->getX() + m_pos->getX(), rdi3->getY() + m_pos->getY(), 255, 255, 255, 255);
  
- //lineRGBA(renderer, m_pos->getX(), m_pos->getY(), m_target->getX(), m_target->getY(), 100, 100, 100, 100);
+ lineRGBA(renderer, m_pos->getX(), m_pos->getY(), m_target->getX(), m_target->getY(), 100, 100, 100, 100);
  lineRGBA(renderer, veh->getX(), veh->getY(), m_target->getX(), m_target->getY(), 100, 100, 100, 255);
 
  filledCircleRGBA(renderer, m_target->getX(), m_target->getY(), r / 2 ,255, 100, 0, 200);
@@ -93,6 +93,7 @@ Vector2D Vehicle::seek(Vector2D* target)
   *m_force = *target - *m_pos;
   m_force->normalize();
   *m_force *= maxSpeed;
+  *m_force -= *m_vel;
 
   m_force->limit(maxForce);
   //applyForce(m_force);
