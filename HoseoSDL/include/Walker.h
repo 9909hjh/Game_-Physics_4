@@ -1,19 +1,14 @@
 #pragma once
 
 #include <main.h>
-
-//#include "usr/include/SDL2/SDL2_gfxPrimitives.h"
-//#include "SD_ttf"
-
-//#include "usr/include/SDL2/SDL2_gfxPrimitives.h"
-//#include "usr/include/SDL2/SDL.h"
-
 #include "InputHandler.h"
 #include "Vector2D.h"
 #include "Game.h"
 
 #include "Vehicle.h"
+#include "Target.h"
 #include <vector>
+#include <iostream>
 
 class Walker
 {
@@ -25,6 +20,9 @@ public:
 
 private:
 	std::vector<Vehicle*> m_Vehicle;
+	//std::vector<Target*> m_Target;
+	//Target* m_Target;
 	Vector2D* m_mousePos;
 	Vector2D* target;
+	Vector2D* steering;
 };

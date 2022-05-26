@@ -2,9 +2,11 @@
 #define HEIGHT (400)
 
 #include "Vehicle.h"
+#include <algorithm>
 #include <math.h>
+#include <iostream>
 
-Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16)
+Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16), desiredSpeed(0)
 {
     m_pos = new Vector2D(x, y);
     m_vel = new Vector2D(0, 0);
@@ -15,6 +17,12 @@ Vehicle::Vehicle(int x, int y) : maxSpeed(4), maxForce(0.25f), r(16)
     rdi2 = new Vector2D(0, 0);
     rdi3 = new Vector2D(0, 0);
     //m_mousePos = new Vector2D(0, 0);
+
+    m_target = new Vector2D(0, 0);
+    m_prediction = new Vector2D(0, 0);
+
+    DesiredVelocity = new Vector2D(0, 0);
+    steer = new Vector2D(0, 0);
 }
 
 void Vehicle::update()
@@ -31,6 +39,7 @@ void Vehicle::update()
     *rdi1 = goradian(-r, -r / 2, radian);
     *rdi2 = goradian(-r, r / 2, radian);
     *rdi3 = goradian(r, 0, radian);
+
 }
 
 Vector2D Vehicle::goradian(float x, float y, float radian)
@@ -50,26 +59,73 @@ Vector2D Vehicle::goradian(float x, float y, float radian)
     return rota;
 }
 
-// void Vehicle::mousemove()
-// {
-//   m_mousePos = TheInputHandler::Instance()->getMousePosition();
-
-//   *m_pos = *m_mousePos;
-// }
-
 void Vehicle::draw(SDL_Renderer* renderer)
 {
     filledTrigonRGBA(renderer, rdi1->getX() + m_pos->getX(), rdi1->getY() + m_pos->getY(), rdi2->getX() + m_pos->getX(), rdi2->getY() + m_pos->getY(), rdi3->getX() + m_pos->getX(), rdi3->getY() + m_pos->getY(), 255, 255, 255, 255);
+    //filledCircleRGBA(renderer, m_target->getX(), m_target->getY(), r, 100, 100, 100, 100);
 }
 
-void Vehicle::seek(Vector2D* target)
+//Vector2D Vehicle::pursue(Vehicle* m_vehicle)
+//{
+//    *m_target = *m_vehicle->m_pos;
+//    *m_prediction = *m_vehicle->m_vel;
+//    *m_prediction *= 10;
+//    *m_target += *m_prediction;
+//
+//    return seek(m_target, false);
+//}
+
+Vector2D Vehicle::arrive(Vector2D* target)
+{
+
+    return seek(target, true);
+}
+
+Vector2D Vehicle::seek(Vector2D* target, bool arrival = false) // 없으면 기본값을 false로 쓴다는 뜻
 {
     *m_force = *target - *m_pos;
+    //desiredSpeed = maxSpeed;
+
+    if (arrival)
+    {
+        int distance = m_force->length();
+        //std::cout << distance << std::endl;
+        if (distance > 0)
+        {
+            int speed = distance / 2 * 0.3f;
+            int other_speed = std::min(speed, maxSpeed);
+            m_force->normalize();
+            *m_force *= other_speed;
+
+            //*DesiredVelocity = *m_force;
+            //*steer = *DesiredVelocity - *m_vel;
+            *m_force -= *m_vel;
+            return *m_force;
+        }
+    }
+
+
+    //int slowRadius = 100;
+    //int distance = m_force->length();
+    ////std::cout << distance << std::endl;
+    //if (distance < slowRadius)
+    //{
+    //    int speed = (distance) / 5 * 0.3;
+
+    //    m_force->normalize();
+    //    *m_force *= speed;
+    //    *m_force -= *m_vel;
+    //    //return *m_force;
+    //}
+
     m_force->normalize();
+    //*m_force *= desiredSpeed;
     *m_force *= maxSpeed;
+    *m_force -= *m_vel;
 
     m_force->limit(maxForce);
-    applyForce(m_force);
+    //applyForce(m_force);
+    return *m_force;
 }
 
 void Vehicle::applyForce(Vector2D* force)
