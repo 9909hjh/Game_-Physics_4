@@ -77,55 +77,29 @@ void Vehicle::draw(SDL_Renderer* renderer)
 
 Vector2D Vehicle::arrive(Vector2D* target)
 {
-
     return seek(target, true);
 }
 
 Vector2D Vehicle::seek(Vector2D* target, bool arrival = false) // 없으면 기본값을 false로 쓴다는 뜻
 {
     *m_force = *target - *m_pos;
-    //desiredSpeed = maxSpeed;
+    double distance = m_force->length();
 
-    if (arrival)
+    if (distance > 0)
     {
-        int distance = m_force->length();
-        //std::cout << distance << std::endl;
-        if (distance > 0)
-        {
-            int speed = distance / 2 * 0.3f;
-            int other_speed = std::min(speed, maxSpeed);
-            m_force->normalize();
-            *m_force *= other_speed;
+        const double DecelerationTweaker = 1.f;
+        //int speed = (distance) / 5 * 0.3;
+        double speed = distance / (50 * DecelerationTweaker);
+        speed = std::min(speed, (double)maxSpeed);
 
-            //*DesiredVelocity = *m_force;
-            //*steer = *DesiredVelocity - *m_vel;
-            *m_force -= *m_vel;
-            return *m_force;
-        }
+        *m_force *= speed;
+        *m_force /= distance;
+        *m_force -= *m_vel;
+
+        return *m_force;
     }
 
-
-    //int slowRadius = 100;
-    //int distance = m_force->length();
-    ////std::cout << distance << std::endl;
-    //if (distance < slowRadius)
-    //{
-    //    int speed = (distance) / 5 * 0.3;
-
-    //    m_force->normalize();
-    //    *m_force *= speed;
-    //    *m_force -= *m_vel;
-    //    //return *m_force;
-    //}
-
-    m_force->normalize();
-    //*m_force *= desiredSpeed;
-    *m_force *= maxSpeed;
-    *m_force -= *m_vel;
-
-    m_force->limit(maxForce);
-    //applyForce(m_force);
-    return *m_force;
+    return Vector2D(0, 0);
 }
 
 void Vehicle::applyForce(Vector2D* force)
